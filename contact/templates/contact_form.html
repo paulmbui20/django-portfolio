@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <form method="post" action="{% url 'contact' %}" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+                type="text"
+                class="form-control {% if form.name.errors %}is-invalid{% endif %}"
+                id="name"
+                name="name"
+                value="{{ form.name.value|default:'' }}">
+            {% for error in form.name.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                id="email"
+                name="email"
+                value="{{ form.email.value|default:'' }}">
+            {% for error in form.email.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input
+                type="tel"
+                class="form-control {% if form.phone.errors %}is-invalid{% endif %}"
+                id="phone"
+                name="phone"
+                value="{{ form.phone.value|default:'' }}">
+            {% for error in form.phone.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+                class="form-control {% if form.message.errors %}is-invalid{% endif %}"
+                id="message"
+                name="message"
+                rows="5">{{ form.message.value|default:'' }}</textarea>
+            {% for error in form.message.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

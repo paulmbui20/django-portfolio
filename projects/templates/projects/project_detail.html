@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ project.title }}</h1>
+<div class="col-md-9">
+        <img src="{{ project.featured_image.url }}" class="img-fluid" alt="Gallery image">
+    </div>
+<p><strong>Status:</strong> {{ project.status|capfirst }}</p>
+<p><strong>Category:</strong> {{ project.category.name }}</p>
+<p><strong>Date:</strong> {{ project.date }}</p>
+<p><strong>Description:</strong> {{ project.description }}</p>
+
+<!-- Project Gallery -->
+<h3>Gallery</h3>
+<div class="row">
+    {% for image in project.images_gallery.all %}
+    <div class="col-md-4">
+        <img src="{{ image.image.url }}" class="img-fluid" alt="Gallery image">
+    </div>
+    {% endfor %}
+</div>
+
+<a href="{{ project.project_link }}" class="btn btn-primary mt-3">Visit Project</a>
+{% endblock %}
